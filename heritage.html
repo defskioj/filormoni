@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage · Qazaq Philharmonic</title>
+  <meta name="description"
+    content="The rich musical heritage of the National Qazaq Philharmonic — 90 years of living tradition.">
+  <link rel="stylesheet" href="shared.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <!-- Логотип теперь ссылка, но класс остался твой, чтобы дизайн не слетел -->
+    <a href="index.html" class="nav-logo" style="text-decoration: none; color: inherit; display: block;">
+      Qazaq <span>Philharmonic</span>
+    </a>
+
+    <ul class="nav-links">
+      <!-- Исправили ссылки на правильные файлы -->
+      <li><a href="concerts.html" data-key="nav-concerts">Concerts</a></li>
+      <li><a href="orchestra.html" data-key="nav-ensemble">Ensemble</a></li>
+      <li><a href="repertoire.html" data-key="nav-repertoire">Repertoire</a></li>
+      <li><a href="heritage.html" data-key="nav-heritage">Heritage</a></li>
+      <li><a href="media.html" data-key="nav-media">Media</a></li>
+    </ul>
+
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en" onclick="changeLanguage('en',this,window._pageTranslations)">ENG</button>
+      <button class="lang-btn" data-lang="ru" onclick="changeLanguage('ru',this,window._pageTranslations)">РУС</button>
+      <button class="lang-btn" data-lang="kz" onclick="changeLanguage('kz',this,window._pageTranslations)">ҚАЗ</button>
+    </div>
+
+    <!-- Кнопка билетов теперь ведет на страницу покупки -->
+    <a href="tickets.html" class="nav-cta" data-key="nav-tickets"
+      style="text-decoration: none; display: inline-block; text-align: center;">
+      Acquire Tickets
+    </a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-tag anim d1" data-key="h-tag">Our Story</div>
+    <h1 class="page-h1 anim d2" data-key="h-title">Nine Decades of<br><em>Living Tradition</em></h1>
+    <p class="page-lead anim d3" data-key="h-lead">From the infinite steppes of Kazakhstan, a musical legacy stretching
+      across centuries — woven into the soul of every performance.</p>
+    <!-- SVG Shanyrak ornament -->
+    <svg style="position:absolute;right:5%;top:50%;transform:translateY(-50%);width:340px;opacity:.08;"
+      viewBox="0 0 540 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="270" cy="270" r="250" stroke="#C9A84C" stroke-width="1" />
+      <line x1="270" y1="50" x2="270" y2="490" stroke="#C9A84C" stroke-width="1.2" />
+      <line x1="50" y1="270" x2="490" y2="270" stroke="#C9A84C" stroke-width="1.2" />
+      <line x1="120" y1="120" x2="420" y2="420" stroke="#C9A84C" stroke-width=".8" />
+      <line x1="420" y1="120" x2="120" y2="420" stroke="#C9A84C" stroke-width=".8" />
+      <circle cx="270" cy="270" r="50" stroke="#C9A84C" stroke-width="1.5" />
+      <circle cx="270" cy="270" r="25" stroke="#C9A84C" stroke-width="1" />
+    </svg>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section">
+    <h2 class="section-h2" data-key="tl-title">A Century in Music</h2>
+    <p class="section-sub" data-key="tl-sub">Key milestones</p>
+    <div style="position:relative;">
+      <div
+        style="position:absolute;left:0;top:0;bottom:0;width:.5px;background:linear-gradient(180deg,var(--gold),transparent);">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3rem;padding-left:3rem;">
+        <div class="glass-card anim d1">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.8rem;">
+            1934</div>
+          <p style="font-size:.8rem;font-weight:500;color:var(--gold-pale);margin-bottom:.5rem;" data-key="tl1-title">
+            Foundation in Almaty</p>
+          <p style="font-size:.75rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.55);" data-key="tl1-desc">
+            The National Qazaq Philharmonic is established, becoming the first professional symphonic institution in
+            Kazakhstan, bringing together the traditions of the steppe with the European orchestra.</p>
+        </div>
+        <div class="glass-card anim d2">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.8rem;">
+            1955</div>
+          <p style="font-size:.8rem;font-weight:500;color:var(--gold-pale);margin-bottom:.5rem;" data-key="tl2-title">
+            The Dombra Concerto Era</p>
+          <p style="font-size:.75rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.55);" data-key="tl2-desc">
+            Legendary composer Akhmet Zhubanov premieres the first Dombra Concerto with a full symphony orchestra — a
+            defining moment in Qazaq musical identity.</p>
+        </div>
+        <div class="glass-card anim d3">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.8rem;">
+            1991</div>
+          <p style="font-size:.8rem;font-weight:500;color:var(--gold-pale);margin-bottom:.5rem;" data-key="tl3-title">
+            Independence & Renewal</p>
+          <p style="font-size:.75rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.55);" data-key="tl3-desc">
+            With Kazakh independence, the Philharmonic becomes a symbol of national renaissance — expanding its
+            repertoire and embarking on its first international tours.</p>
+        </div>
+        <div class="glass-card anim d1">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.8rem;">
+            2024</div>
+          <p style="font-size:.8rem;font-weight:500;color:var(--gold-pale);margin-bottom:.5rem;" data-key="tl4-title">
+            90th Anniversary Season</p>
+          <p style="font-size:.75rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.55);" data-key="tl4-desc">A
+            landmark year celebrating nine decades of excellence — world premieres, international collaborations and a
+            renewed commitment to Qazaq musical heritage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGURES -->
+  <div class="section-mid">
+    <div class="inner">
+      <h2 class="section-h2" data-key="fig-title">Pillars of Our Legacy</h2>
+      <p class="section-sub" data-key="fig-sub">Visionaries who shaped the tradition</p>
+      <div class="grid-3">
+        <div class="glass-card anim d1" style="text-align:center;">
+          <div
+            style="width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--em-glow),var(--em-mid));margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(201,168,76,.15);">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+              <ellipse cx="30" cy="28" rx="16" ry="18" stroke="#C9A84C" stroke-width="1" opacity=".4" />
+              <path d="M14 80 C14 55 46 55 46 80" stroke="#C9A84C" stroke-width="1" opacity=".4" fill="none" />
+            </svg>
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-pale);margin-bottom:.3rem;"
+            data-key="fig1-name">Akhmet Zhubanov</p>
+          <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.5);"
+            data-key="fig1-role">Composer & Founder · 1906–1968</p>
+          <div style="width:30px;height:.5px;background:var(--gold);margin:1rem auto;"></div>
+          <p style="font-size:.72rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.5);" data-key="fig1-desc">
+            The architect of Qazaq symphonic music. Zhubanov pioneered the synthesis of steppe melodies with Western
+            classical forms, composing the first national opera and orchestral works.</p>
+        </div>
+        <div class="glass-card anim d2" style="text-align:center;">
+          <div
+            style="width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--em-glow),var(--em-mid));margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(201,168,76,.15);">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+              <ellipse cx="30" cy="28" rx="16" ry="18" stroke="#C9A84C" stroke-width="1" opacity=".4" />
+              <path d="M14 80 C14 55 46 55 46 80" stroke="#C9A84C" stroke-width="1" opacity=".4" fill="none" />
+            </svg>
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-pale);margin-bottom:.3rem;"
+            data-key="fig2-name">Gaziza Zhubanova</p>
+          <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.5);"
+            data-key="fig2-role">Composer & Conductor · 1927–1993</p>
+          <div style="width:30px;height:.5px;background:var(--gold);margin:1rem auto;"></div>
+          <p style="font-size:.72rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.5);" data-key="fig2-desc">
+            Kazakhstan's first female composer and conductor of international renown. Her works — from chamber pieces to
+            grand symphonies — brought the Qazaq soul to concert halls worldwide.</p>
+        </div>
+        <div class="glass-card anim d3" style="text-align:center;">
+          <div
+            style="width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--em-glow),var(--em-mid));margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(201,168,76,.15);">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+              <ellipse cx="30" cy="28" rx="16" ry="18" stroke="#C9A84C" stroke-width="1" opacity=".4" />
+              <path d="M14 80 C14 55 46 55 46 80" stroke="#C9A84C" stroke-width="1" opacity=".4" fill="none" />
+            </svg>
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-pale);margin-bottom:.3rem;"
+            data-key="fig3-name">Nurgisa Tlendiyev</p>
+          <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.5);"
+            data-key="fig3-role">Conductor & Composer · 1925–1998</p>
+          <div style="width:30px;height:.5px;background:var(--gold);margin:1rem auto;"></div>
+          <p style="font-size:.72rem;font-weight:300;line-height:1.8;color:rgba(232,217,176,.5);" data-key="fig3-desc">
+            Master of the folk orchestra and beloved conductor. Tlendiyev preserved and elevated traditional Qazaq
+            music, creating timeless arrangements still performed today across the world.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEPPE MUSIC -->
+  <section class="section">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+      <div>
+        <div class="page-tag" data-key="sm-tag">The Living Thread</div>
+        <h2 class="section-h2" data-key="sm-title">The Steppe Voice<br>in Modern Music</h2>
+        <div class="gold-divider"></div>
+        <p style="font-size:.82rem;font-weight:300;line-height:2;color:rgba(232,217,176,.6);margin-bottom:1.5rem;"
+          data-key="sm-p1">The music of the Kazakh steppe is not a relic of the past — it is a living, breathing force
+          that continues to shape contemporary composition. From the mournful cry of the Kobyz to the rhythmic pulse of
+          the Dombra, these ancient voices speak in every note our orchestra plays.</p>
+        <p style="font-size:.82rem;font-weight:300;line-height:2;color:rgba(232,217,176,.6);margin-bottom:2.5rem;"
+          data-key="sm-p2">Our musicians undergo rigorous training in both Western conservatoire traditions and Qazaq
+          folk music — a duality that makes our sound unique in the world of classical music.</p>
+        <button class="btn-gold" data-key="sm-btn">Explore Repertoire</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="glass-card" style="display:flex;gap:1.5rem;align-items:flex-start;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);flex-shrink:0;">46</div>
+          <div>
+            <p style="font-size:.75rem;color:var(--gold-pale);margin-bottom:.3rem;" data-key="sm-s1">Nations Toured</p>
+            <p style="font-size:.68rem;font-weight:300;color:rgba(232,217,176,.4);" data-key="sm-s1d">From Vienna to
+              Tokyo, New York to Beijing.</p>
+          </div>
+        </div>
+        <div class="glass-card" style="display:flex;gap:1.5rem;align-items:flex-start;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);flex-shrink:0;">120</div>
+          <div>
+            <p style="font-size:.75rem;color:var(--gold-pale);margin-bottom:.3rem;" data-key="sm-s2">Musicians</p>
+            <p style="font-size:.68rem;font-weight:300;color:rgba(232,217,176,.4);" data-key="sm-s2d">Trained in both
+              classical and Qazaq traditions.</p>
+          </div>
+        </div>
+        <div class="glass-card" style="display:flex;gap:1.5rem;align-items:flex-start;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);flex-shrink:0;">200+</div>
+          <div>
+            <p style="font-size:.75rem;color:var(--gold-pale);margin-bottom:.3rem;" data-key="sm-s3">Commissioned Works
+            </p>
+            <p style="font-size:.68rem;font-weight:300;color:rgba(232,217,176,.4);" data-key="sm-s3d">New compositions
+              inspired by Qazaq heritage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand" data-key="footer-brand">National Qazaq Philharmonic</p>
+        <p class="footer-body" data-key="footer-about">The guardian of Kazakhstan's musical soul since 1934.</p>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col1">Concerts</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-season">2024–25 Season</a></li>
+          <li><a href="#" data-key="footer-gala">Gala Events</a></li>
+          <li><a href="#" data-key="footer-chamber">Chamber Series</a></li>
+          <li><a href="#" data-key="footer-archive">Archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col2">Ensemble</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-conductors">Conductors</a></li>
+          <li><a href="#" data-key="footer-artists">Principal Artists</a></li>
+          <li><a href="#" data-key="footer-soloists">Guest Soloists</a></li>
+          <li><a href="#" data-key="footer-education">Education</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col3">Visit</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-venue">Abay Opera House</a></li>
+          <li><a href="#" data-key="footer-tickets">Tickets</a></li>
+          <li><a href="#" data-key="footer-contact">Contact</a></li>
+          <li><a href="#" data-key="footer-press">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-key="footer-copy">© 2025 National Qazaq Philharmonic · Almaty, Kazakhstan</span>
+      <span style="display:flex;align-items:center;gap:.8rem;">
+        <span data-key="footer-privacy">Privacy</span>
+        <span style="opacity:.3;">·</span>
+        <span data-key="footer-terms">Terms</span>
+        <span style="opacity:.3;">·</span>
+        <span data-key="footer-access">Accessibility</span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    // Словарь для Heritage страницы
+    window._pageTranslations = {
+      en: {
+        'h-tag': 'Our Story', 'h-title': 'Nine Decades of<br><em>Living Tradition</em>',
+        'h-lead': 'From the infinite steppes of Kazakhstan, a musical legacy stretching across centuries.',
+        'tl-title': 'A Century in Music', 'tl-sub': 'Key milestones',
+        'tl1-title': 'Foundation in Almaty', 'tl1-desc': 'The National Qazaq Philharmonic is established — the first professional symphonic institution in Kazakhstan.',
+        'tl2-title': 'The Dombra Concerto Era', 'tl2-desc': 'Akhmet Zhubanov premieres the first Dombra Concerto with a full symphony orchestra.',
+        'tl3-title': 'Independence & Renewal', 'tl3-desc': 'With Kazakh independence, the Philharmonic becomes a symbol of national renaissance.',
+        'tl4-title': '90th Anniversary Season', 'tl4-desc': 'A landmark year — world premieres, international collaborations and renewed commitment to heritage.',
+        'fig-title': 'Pillars of Our Legacy', 'fig-sub': 'Visionaries who shaped the tradition',
+        'fig1-name': 'Akhmet Zhubanov', 'fig1-role': 'Composer & Founder · 1906–1968',
+        'fig1-desc': 'The architect of Qazaq symphonic music, pioneering the synthesis of steppe melodies with Western classical forms.',
+        'fig2-name': 'Gaziza Zhubanova', 'fig2-role': 'Composer & Conductor · 1927–1993',
+        'fig2-desc': 'Kazakhstan\'s first female composer and conductor of international renown.',
+        'fig3-name': 'Nurgisa Tlendiyev', 'fig3-role': 'Conductor & Composer · 1925–1998',
+        'fig3-desc': 'Master of the folk orchestra who preserved and elevated traditional Qazaq music.',
+        'sm-tag': 'The Living Thread', 'sm-title': 'The Steppe Voice<br>in Modern Music',
+        'sm-p1': 'The music of the Kazakh steppe is not a relic of the past — it is a living, breathing force.',
+        'sm-p2': 'Our musicians undergo rigorous training in both Western and Qazaq folk traditions.',
+        'sm-btn': 'Explore Repertoire',
+        'sm-s1': 'Nations Toured', 'sm-s1d': 'From Vienna to Tokyo, New York to Beijing.',
+        'sm-s2': 'Musicians', 'sm-s2d': 'Trained in both classical and Qazaq traditions.',
+        'sm-s3': 'Commissioned Works', 'sm-s3d': 'New compositions inspired by Qazaq heritage.',
+      },
+      ru: {
+        'h-tag': 'Наша история', 'h-title': 'Девять десятилетий<br><em>живой традиции</em>',
+        'h-lead': 'Из бескрайних степей Казахстана — музыкальное наследие, уходящее в глубь веков.',
+        'tl-title': 'Век в музыке', 'tl-sub': 'Ключевые вехи',
+        'tl1-title': 'Основание в Алматы', 'tl1-desc': 'Создана Национальная Казахская Филармония — первое профессиональное симфоническое учреждение Казахстана.',
+        'tl2-title': 'Эпоха концерта для домбры', 'tl2-desc': 'Ахмет Жубанов представляет первый Концерт для домбры с симфоническим оркестром.',
+        'tl3-title': 'Независимость и обновление', 'tl3-desc': 'С обретением независимости Филармония становится символом национального возрождения.',
+        'tl4-title': 'Сезон 90-летия', 'tl4-desc': 'Знаковый год — мировые премьеры, международные коллаборации и верность наследию.',
+        'fig-title': 'Столпы нашего наследия', 'fig-sub': 'Визионеры, сформировавшие традицию',
+        'fig1-name': 'Ахмет Жубанов', 'fig1-role': 'Композитор и основоположник · 1906–1968',
+        'fig1-desc': 'Архитектор казахской симфонической музыки, пионер синтеза степных мелодий с западной классикой.',
+        'fig2-name': 'Газиза Жубанова', 'fig2-role': 'Композитор и дирижёр · 1927–1993',
+        'fig2-desc': 'Первая казахстанская женщина-композитор и дирижёр международного признания.',
+        'fig3-name': 'Нургиса Тлендиев', 'fig3-role': 'Дирижёр и композитор · 1925–1998',
+        'fig3-desc': 'Мастер народного оркестра, сохранивший и возвысивший традиционную казахскую музыку.',
+        'sm-tag': 'Живая нить', 'sm-title': 'Голос степи<br>в современной музыке',
+        'sm-p1': 'Музыка казахской степи — не реликвия прошлого, а живая сила, звучащая в каждой ноте.',
+        'sm-p2': 'Наши музыканты проходят подготовку как в западной консерваторской, так и в казахской народной традиции.',
+        'sm-btn': 'Репертуар',
+        'sm-s1': 'Стран гастролей', 'sm-s1d': 'От Вены до Токио, от Нью-Йорка до Пекина.',
+        'sm-s2': 'Музыкантов', 'sm-s2d': 'Подготовленных в двух великих традициях.',
+        'sm-s3': 'Заказанных сочинений', 'sm-s3d': 'Новые произведения, вдохновлённые казахским наследием.',
+      },
+      kz: {
+        'h-tag': 'Біздің тарих', 'h-title': 'Тоғыз онжылдық<br><em>тірі дәстүр</em>',
+        'h-lead': 'Қазақстанның шексіз даласынан — ғасырлар бойы жалғасқан музыкалық мұра.',
+        'tl-title': 'Бір ғасыр музыкада', 'tl-sub': 'Негізгі кезеңдер',
+        'tl1-title': 'Алматыда негіз қалану', 'tl1-desc': 'Ұлттық Қазақ Филармониясы — Қазақстандағы алғашқы кәсіби симфониялық мекеме ашылды.',
+        'tl2-title': 'Домбыра концертінің дәуірі', 'tl2-desc': 'Ахмет Жұбанов симфониялық оркестрмен алғашқы Домбыра концертін ұсынды.',
+        'tl3-title': 'Тәуелсіздік және жаңару', 'tl3-desc': 'Тәуелсіздікпен Филармония ұлттық ренессанстың белгісіне айналды.',
+        'tl4-title': '90 жылдық мерейтой маусымы', 'tl4-desc': 'Ерекше жыл — әлемдік премьералар, халықаралық ынтымақтастық және мұраға адалдық.',
+        'fig-title': 'Мұрамыздың тіреулері', 'fig-sub': 'Дәстүрді қалыптастырған тұлғалар',
+        'fig1-name': 'Ахмет Жұбанов', 'fig1-role': 'Композитор және негізші · 1906–1968',
+        'fig1-desc': 'Қазақ симфониялық музыкасының сәулетшісі, дала әуендерін батыс классикасымен синтездеген пионер.',
+        'fig2-name': 'Ғазиза Жұбанова', 'fig2-role': 'Композитор және дирижер · 1927–1993',
+        'fig2-desc': 'Қазақстанның халықаралық танымал алғашқы әйел-композиторы және дирижері.',
+        'fig3-name': 'Нұрғиса Тілендиев', 'fig3-role': 'Дирижер және композитор · 1925–1998',
+        'fig3-desc': 'Дәстүрлі қазақ музыкасын сақтап, көтерген халық оркестрінің шебері.',
+        'sm-tag': 'Тірі жіп', 'sm-title': 'Дала үні<br>заманауи музыкада',
+        'sm-p1': 'Қазақ даласының музыкасы өткеннің жәдігері емес — ол әрбір нотамызда тыныс алатын тірі күш.',
+        'sm-p2': 'Біздің музыканттар батыс консерватория және қазақ халық дәстүрлерінде бірдей дайындалады.',
+        'sm-btn': 'Репертуарды зерттеу',
+        'sm-s1': 'Гастроль елдері', 'sm-s1d': 'Венадан Токиоға, Нью-Йорктен Пекинге дейін.',
+        'sm-s2': 'Музыкант', 'sm-s2d': 'Екі ұлы дәстүрде дайындалған.',
+        'sm-s3': 'Тапсырысты шығармалар', 'sm-s3d': 'Қазақ мұрасынан шабыт алған жаңа композициялар.',
+      }
+    };
+  </script>
+</body>
+
+</html>
