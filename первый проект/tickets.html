@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Tickets · Qazaq Philharmonic</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .tickets-section {
+      padding: 5rem 3rem 7rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .t-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      margin-top: 3rem;
+    }
+
+    @media(max-width:700px) {
+      .t-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .t-card {
+      background: var(--em-mid);
+      border: .5px solid rgba(201, 168, 76, .1);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: border-color .3s;
+    }
+
+    .t-card:hover {
+      border-color: rgba(201, 168, 76, .3);
+    }
+
+    .t-card.featured {
+      background: linear-gradient(135deg, var(--em-glow), var(--em-mid));
+      border-color: rgba(201, 168, 76, .2);
+      grid-column: span 2;
+    }
+
+    @media(max-width:700px) {
+      .t-card.featured {
+        grid-column: span 1;
+      }
+    }
+
+    .t-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .t-month {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .55);
+      margin-bottom: 1.2rem;
+    }
+
+    .t-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--gold-pale);
+      margin-bottom: .5rem;
+      line-height: 1.3;
+    }
+
+    .t-card.featured .t-name {
+      font-size: 1.7rem;
+    }
+
+    .t-artist {
+      font-size: .68rem;
+      font-weight: 300;
+      color: rgba(232, 217, 176, .45);
+      letter-spacing: .08em;
+      margin-bottom: .5rem;
+    }
+
+    .t-venue {
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .45);
+      margin-bottom: 2rem;
+    }
+
+    .t-prices {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .t-price {
+      text-align: center;
+    }
+
+    .t-price-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .t-price-lbl {
+      font-size: .55rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .4);
+    }
+
+    .t-sep {
+      width: .5px;
+      background: rgba(201, 168, 76, .15);
+      align-self: stretch;
+    }
+
+    .btn-buy {
+      display: inline-block;
+      font-size: .62rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .8rem 2rem;
+      background: linear-gradient(135deg, var(--gold), #A8873A);
+      color: #0A1F16;
+      border: none;
+      cursor: pointer;
+      transition: opacity .3s;
+    }
+
+    .btn-buy:hover {
+      opacity: .82;
+    }
+
+    .btn-buy-ghost {
+      background: transparent;
+      border: .5px solid rgba(201, 168, 76, .4);
+      color: var(--gold-light);
+      padding: .8rem 2rem;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn-buy-ghost:hover {
+      background: rgba(201, 168, 76, .07);
+    }
+
+    .t-badge {
+      display: inline-block;
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .25rem .8rem;
+      border: .5px solid rgba(201, 168, 76, .5);
+      color: #E8C96A;
+      margin-bottom: 1rem;
+    }
+
+    /* INFO BLOCK */
+    .info-block {
+      background: var(--glass-bg);
+      border: .5px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      padding: 2rem 2.5rem;
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media(max-width:600px) {
+      .info-block {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-item h4 {
+      font-size: .6rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .6rem;
+    }
+
+    .info-item p {
+      font-size: .72rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(232, 217, 176, .5);
+    }
+
+    /* MODAL STYLES */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 15, 10, .85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--em-mid);
+      border: .5px solid rgba(201, 168, 76, .3);
+      width: 100%;
+      max-width: 800px;
+      padding: 3rem 2rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform .4s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    @media(max-width:600px) {
+      .modal-content {
+        padding: 2rem 1rem;
+      }
+      .seat-row {
+        gap: 0.3rem;
+      }
+      .seat {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: 300;
+      z-index: 10;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+
+    .modal-subtitle {
+      text-align: center;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(232, 217, 176, .6);
+      margin-bottom: 3rem;
+    }
+
+    /* SEATING MAP */
+    .seating-map {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .seat-row {
+      display: flex;
+      gap: .6rem;
+      justify-content: center;
+    }
+
+    .seat {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    /* Свободное место */
+    .seat.available {
+      border: 1px solid rgba(201, 168, 76, .5);
+      background: transparent;
+    }
+
+    .seat.available:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, .1);
+    }
+
+    /* Выбранное место */
+    .seat.selected {
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 10px rgba(201, 168, 76, .4);
+    }
+
+    /* Занятое место */
+    .seat.occupied {
+      background: #333;
+      border: 1px solid #222;
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .stage {
+      width: 80%;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(201, 168, 76, .15) 0%, transparent 100%);
+      border-top: 1px solid rgba(201, 168, 76, .3);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      margin: 0 auto 3rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold-pale);
+      font-size: 1.2rem;
+      letter-spacing: .2em;
+    }
+
+    /* CART */
+    .cart-summary {
+      background: rgba(5, 15, 10, .5);
+      border: .5px solid rgba(201, 168, 76, .15);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .cart-info {
+      color: var(--gold-pale);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .cart-info p {
+      margin-bottom: .3rem;
+      font-size: .85rem;
+    }
+
+    .cart-total {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    .btn-confirm {
+      background: linear-gradient(135deg, var(--gold), #A8873A);
+      color: #0A1F16;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 500;
+      transition: opacity .3s;
+    }
+
+    .btn-confirm:hover {
+      opacity: .85;
+    }
+    
+    .btn-confirm:disabled {
+      background: #555;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    /* NOTIFICATION */
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--em-deep);
+      border: 1px solid var(--gold);
+      color: var(--gold-pale);
+      padding: 1.5rem 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .9rem;
+      transform: translateY(150%);
+      transition: transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 2000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    }
+
+    .notification.show {
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <!-- Логотип теперь ссылка, но класс остался твой, чтобы дизайн не слетел -->
+    <a href="index.html" class="nav-logo" style="text-decoration: none; color: inherit; display: block;">
+      Qazaq <span>Philharmonic</span>
+    </a>
+
+    <ul class="nav-links">
+      <!-- Исправили ссылки на правильные файлы -->
+      <li><a href="concerts.html" data-key="nav-concerts">Concerts</a></li>
+      <li><a href="orchestra.html" data-key="nav-ensemble">Ensemble</a></li>
+      <li><a href="repertoire.html" data-key="nav-repertoire">Repertoire</a></li>
+      <li><a href="heritage.html" data-key="nav-heritage">Heritage</a></li>
+      <li><a href="media.html" data-key="nav-media">Media</a></li>
+    </ul>
+
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en" onclick="changeLanguage('en',this,window._pageTranslations)">ENG</button>
+      <button class="lang-btn" data-lang="ru" onclick="changeLanguage('ru',this,window._pageTranslations)">РУС</button>
+      <button class="lang-btn" data-lang="kz" onclick="changeLanguage('kz',this,window._pageTranslations)">ҚАЗ</button>
+    </div>
+
+    <!-- Кнопка билетов теперь ведет на страницу покупки -->
+    <a href="tickets.html" class="nav-cta" data-key="nav-tickets"
+      style="text-decoration: none; display: inline-block; text-align: center;">
+      Acquire Tickets
+    </a>
+  </nav>
+
+  <section class="page-hero">
+    <svg style="position:absolute;right:5%;top:50%;transform:translateY(-50%);width:260px;opacity:.05;"
+      viewBox="0 0 540 540" fill="none">
+      <circle cx="270" cy="270" r="250" stroke="#C9A84C" stroke-width="1" />
+      <line x1="270" y1="50" x2="270" y2="490" stroke="#C9A84C" stroke-width="1.2" />
+      <line x1="50" y1="270" x2="490" y2="270" stroke="#C9A84C" stroke-width="1.2" />
+      <circle cx="270" cy="270" r="50" stroke="#C9A84C" stroke-width="1.5" />
+      <circle cx="270" cy="270" r="25" stroke="#C9A84C" stroke-width="1" />
+    </svg>
+    <div class="page-tag anim d1" data-key="h-tag">2025 Season</div>
+    <h1 class="page-h1 anim d2" data-key="h-title">Acquire <em>Tickets</em></h1>
+    <p class="page-lead anim d3" data-key="h-lead">Reserve your place at the most anticipated evenings of the season.
+      Each seat is an invitation to something unforgettable.</p>
+  </section>
+
+  <div class="tickets-section">
+    <div class="page-tag" data-key="avail-tag">Available Now</div>
+    <h2 class="section-h2" data-key="avail-title">Upcoming Performances</h2>
+
+    <div class="t-grid">
+      <!-- Featured -->
+      <div class="t-card featured">
+        <div class="t-badge" data-key="t1-badge">Gala Opening · Featured</div>
+        <div class="t-date">14</div>
+        <div class="t-month" data-key="t1-month">May 2025</div>
+        <p class="t-name" data-key="t1-name">Mahler · Symphony No. 9 in D major</p>
+        <p class="t-artist" data-key="t1-artist">Ayan Sultanov, conductor</p>
+        <p class="t-venue">Abay Opera House · Almaty</p>
+        <div class="t-prices">
+          <div class="t-price">
+            <div class="t-price-val">₸ 8 500</div>
+            <div class="t-price-lbl" data-key="cat-std">Standard</div>
+          </div>
+          <div class="t-sep"></div>
+          <div class="t-price">
+            <div class="t-price-val">₸ 15 000</div>
+            <div class="t-price-lbl" data-key="cat-prem">Premium</div>
+          </div>
+          <div class="t-sep"></div>
+          <div class="t-price">
+            <div class="t-price-val">₸ 28 000</div>
+            <div class="t-price-lbl" data-key="cat-vip">VIP</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <button class="btn-buy" onclick="openModal(15000)" data-key="btn-buy">Reserve Seat</button>
+          <button class="btn-buy-ghost" onclick="openProgramModal('prog1')" data-key="btn-info">Programme Info</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="t-card">
+        <div class="t-date">21</div>
+        <div class="t-month" data-key="t2-month">May 2025</div>
+        <p class="t-name" data-key="t2-name">Qazaq Night · Traditional Programme</p>
+        <p class="t-artist" data-key="t2-artist">Dombra &amp; Kobyz soloists</p>
+        <p class="t-venue">Congress Hall · Astana</p>
+        <div class="t-prices">
+          <div class="t-price">
+            <div class="t-price-val">₸ 6 000</div>
+            <div class="t-price-lbl" data-key="cat-std">Standard</div>
+          </div>
+          <div class="t-sep"></div>
+          <div class="t-price">
+            <div class="t-price-val">₸ 12 000</div>
+            <div class="t-price-lbl" data-key="cat-prem">Premium</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <button class="btn-buy" onclick="openModal(6000)" data-key="btn-buy">Reserve Seat</button>
+          <button class="btn-buy-ghost" onclick="openProgramModal('prog2')" data-key="btn-info">Programme Info</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="t-card">
+        <div class="t-date">03</div>
+        <div class="t-month" data-key="t3-month">June 2025</div>
+        <p class="t-name" data-key="t3-name">Brahms · Violin Concerto in D</p>
+        <p class="t-artist" data-key="t3-artist">Aigerim Bekova, violin</p>
+        <p class="t-venue">Abay Opera House · Almaty</p>
+        <div class="t-prices">
+          <div class="t-price">
+            <div class="t-price-val">₸ 7 500</div>
+            <div class="t-price-lbl" data-key="cat-std">Standard</div>
+          </div>
+          <div class="t-sep"></div>
+          <div class="t-price">
+            <div class="t-price-val">₸ 14 000</div>
+            <div class="t-price-lbl" data-key="cat-prem">Premium</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <button class="btn-buy" onclick="openModal(7500)" data-key="btn-buy">Reserve Seat</button>
+          <button class="btn-buy-ghost" onclick="openProgramModal('prog3')" data-key="btn-info">Programme Info</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="t-card">
+        <div class="t-date">17</div>
+        <div class="t-month" data-key="t4-month">June 2025</div>
+        <div class="t-badge" data-key="t4-badge">World Première</div>
+        <p class="t-name" data-key="t4-name">Dombra Concerto — World Première</p>
+        <p class="t-artist" data-key="t4-artist">Askar Yessenamanov, conductor</p>
+        <p class="t-venue">National Museum · Astana</p>
+        <div class="t-prices">
+          <div class="t-price">
+            <div class="t-price-val">₸ 9 000</div>
+            <div class="t-price-lbl" data-key="cat-std">Standard</div>
+          </div>
+          <div class="t-sep"></div>
+          <div class="t-price">
+            <div class="t-price-val">₸ 18 000</div>
+            <div class="t-price-lbl" data-key="cat-vip">VIP</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <button class="btn-buy" onclick="openModal(9000)" data-key="btn-buy">Reserve Seat</button>
+          <button class="btn-buy-ghost" onclick="openProgramModal('prog4')" data-key="btn-info">Programme Info</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="info-block">
+      <div class="info-item">
+        <h4 data-key="info1-t">Box Office Hours</h4>
+        <p data-key="info1-b">Monday – Friday: 10:00 – 19:00<br>Saturday: 11:00 – 17:00<br>Sunday: closed</p>
+      </div>
+      <div class="info-item">
+        <h4 data-key="info2-t">Venue Address</h4>
+        <p data-key="info2-b">Abay Opera House<br>110 Kabanbay Batyr Ave<br>Almaty, Kazakhstan</p>
+      </div>
+      <div class="info-item">
+        <h4 data-key="info3-t">Group Bookings</h4>
+        <p data-key="info3-b">Groups of 10+ receive a 15% discount. Contact our box office for reservations and
+          corporate packages.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand" data-key="footer-brand">National Qazaq Philharmonic</p>
+        <p class="footer-body" data-key="footer-about">The guardian of Kazakhstan's musical soul since 1934.</p>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col1">Concerts</p>
+        <ul class="footer-links">
+          <li><a href="concerts.html" data-key="footer-season">2024–25 Season</a></li>
+          <li><a href="#" data-key="footer-gala">Gala Events</a></li>
+          <li><a href="#" data-key="footer-archive">Archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col2">Ensemble</p>
+        <ul class="footer-links">
+          <li><a href="orchestra.html" data-key="footer-conductors">Conductors</a></li>
+          <li><a href="orchestra.html" data-key="footer-artists">Principal Artists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col3">Visit</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-venue">Abay Opera House</a></li>
+          <li><a href="#" data-key="footer-contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span data-key="footer-copy">© 2025 National Qazaq Philharmonic · Almaty</span></div>
+  </footer>
+
+  <!-- PROGRAMME INFO MODAL -->
+  <div class="modal-overlay" id="programModal">
+    <div class="modal-content" style="max-width: 650px;">
+      <button class="modal-close" onclick="closeProgramModal()">&times;</button>
+      <h3 class="modal-title" id="pmTitle" data-key="modal_title" style="text-align: left;">-</h3>
+      <p class="modal-subtitle" id="pmSubtitle" data-key="modal_subtitle" style="text-align: left; margin-bottom: 1.5rem;">-</p>
+      
+      <div style="border-top: .5px solid rgba(201,168,76,.15); padding-top: 1.5rem; margin-bottom: 1.5rem;">
+        <p id="pmDesc" data-key="modal_description" style="font-size: .8rem; font-weight: 300; line-height: 1.8; color: rgba(232, 217, 176, .8); margin-bottom: 2rem;">-</p>
+        
+        <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 1rem;" data-key="modal_program_label">Programme</h4>
+        <ul id="pmList" data-key="modal_list_content" style="list-style: none; display: flex; flex-direction: column; gap: .8rem; font-size: .8rem; color: rgba(232, 217, 176, .6);">
+          <!-- Dynamic list -->
+        </ul>
+      </div>
+
+      <div style="background: rgba(5,15,10,.5); padding: 1.5rem; border: .5px solid rgba(201,168,76,.15);">
+        <h4 style="font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem;" data-key="modal_performers_label">Artists</h4>
+        <p id="pmArtists" data-key="modal_performers_content" style="font-size: .8rem; font-weight: 300; line-height: 1.6; color: rgba(232, 217, 176, .8);">-</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 class="modal-title" data-key="modal-title">Select Your Seat</h3>
+      <p class="modal-subtitle" data-key="modal-sub">Parterre</p>
+
+      <div class="stage" data-key="modal-stage">STAGE</div>
+
+      <div class="seating-map" id="seatingMap">
+        <!-- Сетка мест будет сгенерирована через JS -->
+      </div>
+
+      <div class="cart-summary">
+        <div class="cart-info">
+          <p><span data-key="cart-row">Row</span>: <span id="selectedRow">-</span></p>
+          <p><span data-key="cart-seat">Seat</span>: <span id="selectedSeat">-</span></p>
+        </div>
+        <div class="cart-total">
+          <span data-key="cart-total">Total</span>: ₸ <span id="totalPrice">0</span>
+        </div>
+        <button class="btn-confirm" id="btnConfirm" disabled onclick="confirmBooking()" data-key="btn-confirm">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div class="notification" id="notification">
+    <span data-key="notif-success">Ticket booked successfully! Please check your email.</span>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    // === ЛОГИКА СХЕМЫ ЗАЛА ===
+    const ROWS = 8;
+    const SEATS_PER_ROW = 12;
+    let currentPricePerSeat = 0;
+    let selectedSeatObj = null; // {row, seat}
+
+    const mapContainer = document.getElementById('seatingMap');
+    const modal = document.getElementById('bookingModal');
+    const rowEl = document.getElementById('selectedRow');
+    const seatEl = document.getElementById('selectedSeat');
+    const totalEl = document.getElementById('totalPrice');
+    const btnConfirm = document.getElementById('btnConfirm');
+    const notification = document.getElementById('notification');
+
+    // Генерация зала
+    function generateSeats() {
+      mapContainer.innerHTML = '';
+      for (let r = 1; r <= ROWS; r++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'seat-row';
+        for (let s = 1; s <= SEATS_PER_ROW; s++) {
+          const seat = document.createElement('div');
+          
+          // Имитация случайных занятых мест (около 20%)
+          const isOccupied = Math.random() < 0.2;
+          
+          seat.className = `seat ${isOccupied ? 'occupied' : 'available'}`;
+          seat.dataset.row = r;
+          seat.dataset.seat = s;
+
+          if (!isOccupied) {
+            seat.onclick = () => selectSeat(seat, r, s);
+          }
+
+          rowDiv.appendChild(seat);
+        }
+        mapContainer.appendChild(rowDiv);
+      }
+    }
+
+    function selectSeat(seatElement, r, s) {
+      // Снимаем выделение с предыдущего
+      const prevSelected = document.querySelector('.seat.selected');
+      if (prevSelected) prevSelected.classList.remove('selected');
+
+      // Выделяем текущее
+      seatElement.classList.add('selected');
+      selectedSeatObj = { row: r, seat: s };
+
+      // Обновляем корзину
+      rowEl.textContent = r;
+      seatEl.textContent = s;
+      totalEl.textContent = currentPricePerSeat.toLocaleString('ru-RU');
+      btnConfirm.disabled = false;
+    }
+
+    function openModal(price) {
+      currentPricePerSeat = price;
+      // Сброс корзины
+      selectedSeatObj = null;
+      rowEl.textContent = '-';
+      seatEl.textContent = '-';
+      totalEl.textContent = '0';
+      btnConfirm.disabled = true;
+
+      generateSeats();
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    function confirmBooking() {
+      closeModal();
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
+
+    // Закрытие по клику вне окна
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+      if (event.target == document.getElementById('programModal')) {
+        closeProgramModal();
+      }
+    }
+
+    // === ЛОГИКА ОКНА "О ПРОГРАММЕ" ===
+    const programData = {
+      en: {
+        prog1: {
+          title: 'Mahler · Symphony No. 9',
+          subtitle: 'Gala Opening',
+          desc: 'Gustav Mahler\'s Symphony No. 9 is his last completed symphony, often described as a farewell to the world. It is a monumental work that stretches the boundaries of tonality and emotional expression, journeying from the warmth of life to a serene fading away.',
+          list: [
+            'I. Andante comodo',
+            'II. Im Tempo eines gemächlichen Ländlers',
+            'III. Rondo-Burleske: Allegro assai',
+            'IV. Adagio. Sehr langsam und noch zurückhaltend'
+          ],
+          artists: 'Ayan Sultanov (Conductor)<br>National Qazaq Philharmonic Orchestra'
+        },
+        prog2: {
+          title: 'Qazaq Night',
+          subtitle: 'Traditional Programme',
+          desc: 'An immersive journey into the heart of the Great Steppe. This programme showcases the ancient sounds of traditional Kazakh instruments, blending epic tales of the past with the vibrant spirit of nomadic culture.',
+          list: [
+            'Kurmangazy – "Adai" & "Saryarka"',
+            'Nurgisa Tlendiyev – "The Year of the Leopard"',
+            'Traditional Kui Medley',
+            'Akhmet Zhubanov – "Dombra Concerto No. 1" (excerpts)'
+          ],
+          artists: 'Dombra & Kobyz Soloists<br>Folk Instrument Ensemble'
+        },
+        prog3: {
+          title: 'Brahms · Violin Concerto',
+          subtitle: 'Chamber Series',
+          desc: 'Johannes Brahms\'s Violin Concerto in D major is one of the most beloved and demanding works in the violin repertoire. It combines lyrical beauty with formidable technical challenges, set against a rich orchestral tapestry.',
+          list: [
+            'I. Allegro non troppo',
+            'II. Adagio',
+            'III. Allegro giocoso, ma non troppo vivace - Poco più presto'
+          ],
+          artists: 'Aigerim Bekova (Violin)<br>National Chamber Orchestra'
+        },
+        prog4: {
+          title: 'Dombra Concerto',
+          subtitle: 'World Première',
+          desc: 'A historic evening presenting a brand-new contemporary concerto for Dombra and full symphony orchestra. This world première bridges centuries of tradition with modern symphonic writing.',
+          list: [
+            'Opening Overture "Breath of the Steppe"',
+            'Dombra Concerto – I. Awakening',
+            'Dombra Concerto – II. Whispers of the Wind',
+            'Dombra Concerto – III. Gallop'
+          ],
+          artists: 'Askar Yessenamanov (Conductor)<br>Principal Dombra Soloist'
+        }
+      },
+      ru: {
+        prog1: {
+          title: 'Малер · Симфония № 9',
+          subtitle: 'Гала-открытие',
+          desc: 'Девятая симфония Густава Малера — его последняя завершенная симфония, которую часто называют прощанием с миром. Это монументальное произведение, расширяющее границы тональности и эмоциональной выразительности: от тепла жизни к безмятежному угасанию.',
+          list: [
+            'I. Анданте комодо (Спокойно, удобно)',
+            'II. В темпе умеренного лендлера',
+            'III. Рондо-Бурлеска (Весьма скоро)',
+            'IV. Адажио (Очень медленно и еще более сдержанно)'
+          ],
+          artists: 'Аян Султанов (Дирижер)<br>Государственная Казахская филармония'
+        },
+        prog2: {
+          title: 'Казахская ночь',
+          subtitle: 'Традиционная программа',
+          desc: 'Захватывающее путешествие в самое сердце Великой Степи. В этой программе звучат древние мотивы традиционных казахских инструментов, соединяя эпические сказания прошлого с ярким духом кочевой культуры.',
+          list: [
+            'Курмангазы – «Адай» и «Сарыарка»',
+            'Нургиса Тлендиев – «Год Барса»',
+            'Попурри традиционных кюев',
+            'Ахмет Жубанов – «Концерт для домбры № 1» (отрывки)'
+          ],
+          artists: 'Солисты на домбре и кобызе<br>Ансамбль народных инструментов'
+        },
+        prog3: {
+          title: 'Брамс · Скрипичный концерт',
+          subtitle: 'Камерная серия',
+          desc: 'Концерт для скрипки с оркестром ре мажор Иоганнеса Брамса — одно из самых любимых и сложных произведений скрипичного репертуара. Оно сочетает в себе лирическую красоту и невероятные технические требования на фоне богатой оркестровки.',
+          list: [
+            'I. Аллегро нон троппо (Не слишком быстро)',
+            'II. Адажио (Медленно)',
+            'III. Аллегро джокозо (Радостно, но не слишком живо - Чуть быстрее)'
+          ],
+          artists: 'Айгерим Бекова (Скрипка)<br>Государственный камерный оркестр'
+        },
+        prog4: {
+          title: 'Концерт для домбры',
+          subtitle: 'Мировая премьера',
+          desc: 'Исторический вечер: мировая премьера нового современного концерта для домбры и большого симфонического оркестра. Произведение, соединяющее многовековые традиции с современным симфоническим звучанием.',
+          list: [
+            'Увертюра «Дыхание степи»',
+            'Концерт для домбры – I. Пробуждение',
+            'Концерт для домбры – II. Шепот ветра',
+            'Концерт для домбры – III. Галоп'
+          ],
+          artists: 'Аскар Есенаманов (Дирижер)<br>Главный солист на домбре'
+        }
+      },
+      kz: {
+        prog1: {
+          title: 'Малер · 9-симфония',
+          subtitle: 'Гала ашылуы',
+          desc: 'Густав Малердің 9-симфониясы — оның аяқталған соңғы симфониясы, оны әлеммен қоштасу деп жиі атайды. Бұл өмір жылуынан бастап, тыныш сөнуге дейінгі эмоциялық көріністің шекарасын кеңейтетін монументалды шығарма.',
+          list: [
+            'I. Анданте комодо (Баяу, жайлы)',
+            'II. Орташа лендлер қарқынында',
+            'III. Рондо-Бурлеск (Өте жылдам)',
+            'IV. Адажио (Өте баяу және одан да ұстамды)'
+          ],
+          artists: 'Аян Сұлтанов (Дирижер)<br>Қазақ мемлекеттік филармониясының оркестрі'
+        },
+        prog2: {
+          title: 'Қазақ кеші',
+          subtitle: 'Дәстүрлі бағдарлама',
+          desc: 'Ұлы Даланың жүрегіне әсерлі саяхат. Бұл бағдарламада қазақтың дәстүрлі аспаптарының ежелгі сарындары ойналып, өткеннің эпикалық хикаялары көшпелі мәдениеттің рухымен ұштасады.',
+          list: [
+            'Құрманғазы – «Адай» және «Сарыарқа»',
+            'Нұрғиса Тілендиев – «Барыс жылы»',
+            'Дәстүрлі күйлер попурриі',
+            'Ахмет Жұбанов – «Домбыра концерті № 1» (үзінділер)'
+          ],
+          artists: 'Домбыра және қылқобыз солистері<br>Халық аспаптар ансамблі'
+        },
+        prog3: {
+          title: 'Брамс · Скрипка концерті',
+          subtitle: 'Камералық серия',
+          desc: 'Иоганнес Брамстың ре мажордағы скрипка концерті — скрипка репертуарындағы ең сүйікті және күрделі шығармалардың бірі. Ол бай оркестрлік сүйемелдеумен лирикалық сұлулық пен техникалық қиындықтарды біріктіреді.',
+          list: [
+            'I. Аллегро нон троппо (Тым жылдам емес)',
+            'II. Адажио (Баяу)',
+            'III. Аллегро джокозо (Қуанышты, бірақ тым жанды емес - Аздап тезірек)'
+          ],
+          artists: 'Айгерім Бекова (Скрипка)<br>Мемлекеттік камералық оркестр'
+        },
+        prog4: {
+          title: 'Домбыра концерті',
+          subtitle: 'Дүниежүзілік премьера',
+          desc: 'Тарихи кеш: домбыра мен үлкен симфониялық оркестрге арналған жаңа заманауи концерттің тұсаукесері. Ғасырлық дәстүрді қазіргі симфониялық үнмен байланыстыратын шығарма.',
+          list: [
+            '«Дала лебі» увертюрасы',
+            'Домбыра концерті – I. Ояну',
+            'Домбыра концерті – II. Желдің сыбдыры',
+            'Домбыра концерті – III. Шабыс'
+          ],
+          artists: 'Асқар Есенаманов (Дирижер)<br>Бас домбырашы'
+        }
+      }
+    };
+
+    const pmModal = document.getElementById('programModal');
+    const pmTitle = document.getElementById('pmTitle');
+    const pmSubtitle = document.getElementById('pmSubtitle');
+    const pmDesc = document.getElementById('pmDesc');
+    const pmList = document.getElementById('pmList');
+    const pmArtists = document.getElementById('pmArtists');
+
+    let currentProgId = null;
+
+    function openProgramModal(progId) {
+      currentProgId = progId;
+      updateProgramModal(progId);
+      pmModal.classList.add('active');
+    }
+
+    function closeProgramModal() {
+      pmModal.classList.remove('active');
+      currentProgId = null;
+    }
+
+    function updateProgramModal(progId) {
+      if (!progId) return;
+
+      // Обновляем переводы для всех языков
+      ['en', 'ru', 'kz'].forEach(lang => {
+        const data = programData[lang][progId];
+        if (data && window._pageTranslations[lang]) {
+          window._pageTranslations[lang]['modal_title'] = data.title;
+          window._pageTranslations[lang]['modal_subtitle'] = data.subtitle;
+          window._pageTranslations[lang]['modal_description'] = data.desc;
+          
+          let listHtml = '';
+          data.list.forEach((item, idx) => {
+            const key = `modal_part${idx + 1}`;
+            window._pageTranslations[lang][key] = item;
+            listHtml += `<li><span style="color: var(--gold); margin-right: 8px;">—</span> <span data-key="${key}">${item}</span></li>`;
+          });
+          window._pageTranslations[lang]['modal_list_content'] = listHtml;
+          window._pageTranslations[lang]['modal_performers_content'] = data.artists;
+        }
+      });
+
+      // Переключаем контент сразу через changeLanguage
+      const savedLang = localStorage.getItem('philLang') || 'en';
+      const activeBtn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
+      if (typeof changeLanguage === 'function') {
+        changeLanguage(savedLang, activeBtn, window._pageTranslations);
+      }
+    }
+
+    window._pageTranslations = {
+      en: {
+        'h-tag': '2025 Season', 'h-title': 'Acquire <em>Tickets</em>',
+        'h-lead': 'Reserve your place at the most anticipated evenings of the season.',
+        'avail-tag': 'Available Now', 'avail-title': 'Upcoming Performances',
+        'cat-std': 'Standard', 'cat-prem': 'Premium', 'cat-vip': 'VIP',
+        'btn-buy': 'Reserve Seat', 'btn-info': 'Programme Info',
+        't1-badge': 'Gala Opening · Featured', 't1-month': 'May 2025',
+        't1-name': 'Mahler · Symphony No. 9 in D major', 't1-artist': 'Ayan Sultanov, conductor',
+        't2-month': 'May 2025', 't2-name': 'Qazaq Night · Traditional Programme', 't2-artist': 'Dombra & Kobyz soloists',
+        't3-month': 'June 2025', 't3-name': 'Brahms · Violin Concerto in D', 't3-artist': 'Aigerim Bekova, violin',
+        't4-month': 'June 2025', 't4-badge': 'World Première', 't4-name': 'Dombra Concerto — World Première', 't4-artist': 'Askar Yessenamanov, conductor',
+        'info1-t': 'Box Office Hours', 'info1-b': 'Monday – Friday: 10:00 – 19:00<br>Saturday: 11:00 – 17:00<br>Sunday: closed',
+        'info2-t': 'Venue Address', 'info2-b': 'Abay Opera House<br>110 Kabanbay Batyr Ave<br>Almaty, Kazakhstan',
+        'info3-t': 'Group Bookings', 'info3-b': 'Groups of 10+ receive a 15% discount. Contact our box office for reservations.',
+        // Modal translations
+        'modal-title': 'Select Your Seat',
+        'modal-sub': 'Parterre',
+        'modal-stage': 'STAGE',
+        'cart-row': 'Row',
+        'cart-seat': 'Seat',
+        'cart-total': 'Total',
+        'btn-confirm': 'Confirm Booking',
+        'notif-success': 'Ticket booked successfully! Please check your email.',
+        'modal_program_label': 'Programme',
+        'modal_performers_label': 'Artists',
+        'modal_title': '-', 'modal_subtitle': '-', 'modal_description': '-',
+        'modal_list_content': '', 'modal_performers_content': '-'
+      },
+      ru: {
+        'h-tag': 'Сезон 2025', 'h-title': 'Купить <em>Билеты</em>',
+        'h-lead': 'Займите своё место на самых ожидаемых вечерах сезона.',
+        'avail-tag': 'Доступно сейчас', 'avail-title': 'Ближайшие выступления',
+        'cat-std': 'Стандарт', 'cat-prem': 'Премиум', 'cat-vip': 'VIP',
+        'btn-buy': 'Забронировать', 'btn-info': 'О программе',
+        't1-badge': 'Гала-открытие · Избранное', 't1-month': 'Май 2025',
+        't1-name': 'Малер · Симфония № 9 ре мажор', 't1-artist': 'Аян Султанов, дирижёр',
+        't2-month': 'Май 2025', 't2-name': 'Казахская ночь · Традиционная программа', 't2-artist': 'Солисты на домбре и кобызе',
+        't3-month': 'Июнь 2025', 't3-name': 'Брамс · Скрипичный концерт ре мажор', 't3-artist': 'Айгерим Бекова, скрипка',
+        't4-month': 'Июнь 2025', 't4-badge': 'Мировая премьера', 't4-name': 'Концерт для домбры — Мировая премьера', 't4-artist': 'Аскар Есенаманов, дирижёр',
+        'info1-t': 'Часы кассы', 'info1-b': 'Пн–Пт: 10:00 – 19:00<br>Суббота: 11:00 – 17:00<br>Воскресенье: закрыто',
+        'info2-t': 'Адрес зала', 'info2-b': 'Театр оперы им. Абая<br>пр. Кабанбай Батыра, 110<br>Алматы, Казахстан',
+        'info3-t': 'Групповые заказы', 'info3-b': 'Группам от 10 человек — скидка 15%. Свяжитесь с кассой для бронирования.',
+        // Modal translations
+        'modal-title': 'Выберите место',
+        'modal-sub': 'Партер',
+        'modal-stage': 'СЦЕНА',
+        'cart-row': 'Ряд',
+        'cart-seat': 'Место',
+        'cart-total': 'Итого',
+        'btn-confirm': 'Подтвердить бронь',
+        'notif-success': 'Билет успешно забронирован! Проверьте вашу почту.',
+        'modal_program_label': 'Программа',
+        'modal_performers_label': 'Исполнители',
+        'modal_title': '-', 'modal_subtitle': '-', 'modal_description': '-',
+        'modal_list_content': '', 'modal_performers_content': '-'
+      },
+      kz: {
+        'h-tag': '2025 Маусымы', 'h-title': '<em>Билет</em> сатып алу',
+        'h-lead': 'Маусымның ең күтілген кештеріне орын бронь етіңіз.',
+        'avail-tag': 'Қазір қол жетімді', 'avail-title': 'Жақындағы өнер көрсетулер',
+        'cat-std': 'Стандарт', 'cat-prem': 'Премиум', 'cat-vip': 'VIP',
+        'btn-buy': 'Орын брондау', 'btn-info': 'Бағдарлама туралы',
+        't1-badge': 'Гала ашылуы · Таңдаулы', 't1-month': 'Мамыр 2025',
+        't1-name': 'Малер · 9-симфония, ре мажор', 't1-artist': 'Аян Сүлтанов, дирижер',
+        't2-month': 'Мамыр 2025', 't2-name': 'Қазақ кеші · Дәстүрлі бағдарлама', 't2-artist': 'Домбыра мен қылқобыз солистері',
+        't3-month': 'Маусым 2025', 't3-name': 'Брамс · Скрипка концерті', 't3-artist': 'Айгерім Бекова, скрипка',
+        't4-month': 'Маусым 2025', 't4-badge': 'Дүниежүзілік премьера', 't4-name': 'Домбыра концерті — Дүниежүзілік премьера', 't4-artist': 'Асқар Есенаманов, дирижер',
+        'info1-t': 'Касса жұмыс уақыты', 'info1-b': 'Дс–Жм: 10:00 – 19:00<br>Сенбі: 11:00 – 17:00<br>Жексенбі: жабық',
+        'info2-t': 'Зал мекенжайы', 'info2-b': 'Абай атындағы опера театры<br>Қабанбай батыр даңғылы, 110<br>Алматы, Қазақстан',
+        'info3-t': 'Топтық брондау', 'info3-b': '10+ адам үшін 15% жеңілдік. Бронь үшін кассамен байланысыңыз.',
+        // Modal translations
+        'modal-title': 'Орынды таңдаңыз',
+        'modal-sub': 'Партер',
+        'modal-stage': 'САХНА',
+        'cart-row': 'Қатар',
+        'cart-seat': 'Орын',
+        'cart-total': 'Барлығы',
+        'btn-confirm': 'Броньды растау',
+        'notif-success': 'Билет сәтті брондалды! Электрондық поштаңызды тексеріңіз.',
+        'modal_program_label': 'Бағдарлама',
+        'modal_performers_label': 'Орындаушылар',
+        'modal_title': '-', 'modal_subtitle': '-', 'modal_description': '-',
+        'modal_list_content': '', 'modal_performers_content': '-'
+      }
+    };
+  </script>
+</body>
+
+</html>

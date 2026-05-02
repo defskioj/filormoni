@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Concerts · Qazaq Philharmonic</title>
+  <meta name="description" content="Full concert schedule of the National Qazaq Philharmonic — May, June, July 2025.">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 3rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .filter-label {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .4);
+    }
+
+    .filter-btn {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      background: transparent;
+      border: none;
+      border-bottom: .5px solid transparent;
+      color: rgba(201, 168, 76, .45);
+      cursor: pointer;
+      padding: .2rem 0;
+      font-family: 'Montserrat', sans-serif;
+      transition: all .25s;
+    }
+
+    .filter-btn:hover {
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* CONCERTS GRID 6 cards */
+    .concerts-full {
+      padding: 3rem 3rem 7rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .grid-concerts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+
+    @media(max-width:900px) {
+      .grid-concerts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .c-card {
+      background: var(--em-mid);
+      border: .5px solid rgba(201, 168, 76, .08);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    .c-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 168, 76, .05), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .c-card:hover {
+      border-color: rgba(201, 168, 76, .25);
+    }
+
+    .c-card:hover::before {
+      opacity: 1;
+    }
+
+    .c-card.premiere {
+      background: linear-gradient(135deg, var(--em-glow), var(--em-mid));
+      border-color: rgba(201, 168, 76, .2);
+    }
+
+    .c-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .c-month {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .55);
+    }
+
+    .c-sep {
+      width: 30px;
+      height: .5px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1rem 0;
+    }
+
+    .c-prog {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--gold-pale);
+      line-height: 1.3;
+      margin-bottom: .6rem;
+    }
+
+    .c-perf {
+      font-size: .68rem;
+      font-weight: 300;
+      color: rgba(232, 217, 176, .45);
+      letter-spacing: .08em;
+      margin-bottom: 1.2rem;
+    }
+
+    .c-venue {
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, .5);
+      margin-bottom: 1.8rem;
+    }
+
+    .c-badge {
+      display: inline-block;
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .25rem .8rem;
+      border: .5px solid rgba(201, 168, 76, .35);
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .c-badge.red {
+      border-color: rgba(201, 168, 76, .6);
+      color: #E8C96A;
+    }
+
+    .btn-ticket {
+      display: inline-block;
+      font-size: .6rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .75rem 1.8rem;
+      background: linear-gradient(135deg, var(--gold), #A8873A);
+      color: #0A1F16;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .3s;
+    }
+
+    .btn-ticket:hover {
+      opacity: .82;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <!-- Логотип теперь ссылка, но класс остался твой, чтобы дизайн не слетел -->
+    <a href="index.html" class="nav-logo" style="text-decoration: none; color: inherit; display: block;">
+      Qazaq <span>Philharmonic</span>
+    </a>
+
+    <ul class="nav-links">
+      <!-- Исправили ссылки на правильные файлы -->
+      <li><a href="concerts.html" data-key="nav-concerts">Concerts</a></li>
+      <li><a href="orchestra.html" data-key="nav-ensemble">Ensemble</a></li>
+      <li><a href="repertoire.html" data-key="nav-repertoire">Repertoire</a></li>
+      <li><a href="heritage.html" data-key="nav-heritage">Heritage</a></li>
+      <li><a href="media.html" data-key="nav-media">Media</a></li>
+    </ul>
+
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en" onclick="changeLanguage('en',this,window._pageTranslations)">ENG</button>
+      <button class="lang-btn" data-lang="ru" onclick="changeLanguage('ru',this,window._pageTranslations)">РУС</button>
+      <button class="lang-btn" data-lang="kz" onclick="changeLanguage('kz',this,window._pageTranslations)">ҚАЗ</button>
+    </div>
+
+    <!-- Кнопка билетов теперь ведет на страницу покупки -->
+    <a href="tickets.html" class="nav-cta" data-key="nav-tickets"
+      style="text-decoration: none; display: inline-block; text-align: center;">
+      Acquire Tickets
+    </a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <svg style="position:absolute;right:4%;top:50%;transform:translateY(-50%);width:300px;opacity:.06;"
+      viewBox="0 0 540 540" fill="none">
+      <circle cx="270" cy="270" r="250" stroke="#C9A84C" stroke-width="1" />
+      <line x1="270" y1="50" x2="270" y2="490" stroke="#C9A84C" stroke-width="1.2" />
+      <line x1="50" y1="270" x2="490" y2="270" stroke="#C9A84C" stroke-width="1.2" />
+      <line x1="120" y1="120" x2="420" y2="420" stroke="#C9A84C" stroke-width=".8" />
+      <line x1="420" y1="120" x2="120" y2="420" stroke="#C9A84C" stroke-width=".8" />
+      <circle cx="270" cy="270" r="50" stroke="#C9A84C" stroke-width="1.5" />
+    </svg>
+    <div class="page-tag anim d1" data-key="h-tag">2025 Season</div>
+    <h1 class="page-h1 anim d2" data-key="h-title"><em>Concert</em> Calendar</h1>
+    <p class="page-lead anim d3" data-key="h-lead">Six performances across Almaty and Astana — from grand symphonic
+      evenings to intimate chamber nights.</p>
+  </section>
+
+  <!-- MONTH FILTER -->
+  <div class="filter-bar">
+    <span class="filter-label" data-key="filter-label">Filter by month</span>
+    <button class="filter-btn active" data-month="all" onclick="filterMonth('all',this)"
+      data-key="filter-all">All</button>
+    <button class="filter-btn" data-month="may" onclick="filterMonth('may',this)" data-key="filter-may">May</button>
+    <button class="filter-btn" data-month="jun" onclick="filterMonth('jun',this)" data-key="filter-jun">June</button>
+    <button class="filter-btn" data-month="jul" onclick="filterMonth('jul',this)" data-key="filter-jul">July</button>
+  </div>
+
+  <!-- 6 CONCERT CARDS -->
+  <div class="concerts-full">
+    <div class="grid-concerts">
+
+      <!-- Card 1 -->
+      <div class="c-card" data-month="may">
+        <div class="c-date">14</div>
+        <div class="c-month" data-key="c1-month">May 2025</div>
+        <div class="c-badge" data-key="c1-badge">Gala Opening</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c1-prog">Mahler · Symphony No. 9 in D major</p>
+        <p class="c-perf" data-key="c1-perf">Ayan Sultanov, conductor</p>
+        <p class="c-venue">Abay Opera House · Almaty</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="c-card" data-month="may">
+        <div class="c-date">21</div>
+        <div class="c-month" data-key="c2-month">May 2025</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c2-prog">Qazaq Night · Traditional Programme</p>
+        <p class="c-perf" data-key="c2-perf">Dombra &amp; Kobyz soloists</p>
+        <p class="c-venue">Congress Hall · Astana</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="c-card" data-month="jun">
+        <div class="c-date">03</div>
+        <div class="c-month" data-key="c3-month">June 2025</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c3-prog">Brahms · Violin Concerto in D</p>
+        <p class="c-perf" data-key="c3-perf">Aigerim Bekova, violin</p>
+        <p class="c-venue">Abay Opera House · Almaty</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+      <!-- Card 4 — Première -->
+      <div class="c-card premiere" data-month="jun">
+        <div class="c-date">17</div>
+        <div class="c-month" data-key="c4-month">June 2025</div>
+        <div class="c-badge red" data-key="c4-badge">World Première</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c4-prog">Dombra Concerto — New Commission</p>
+        <p class="c-perf" data-key="c4-perf">Askar Yessenamanov, conductor</p>
+        <p class="c-venue">National Museum · Astana</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="c-card" data-month="jun">
+        <div class="c-date">28</div>
+        <div class="c-month" data-key="c5-month">June 2025</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c5-prog">Shostakovich · Symphony No. 5 in D minor</p>
+        <p class="c-perf" data-key="c5-perf">Ayan Sultanov, conductor</p>
+        <p class="c-venue">Abay Opera House · Almaty</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="c-card" data-month="jul">
+        <div class="c-date">12</div>
+        <div class="c-month" data-key="c6-month">July 2025</div>
+        <div class="c-sep"></div>
+        <p class="c-prog" data-key="c6-prog">Summer Gala · Music of the Steppe</p>
+        <p class="c-perf" data-key="c6-perf">Full Ensemble &amp; Guest Artists</p>
+        <p class="c-venue">Republic Palace · Almaty</p>
+        <a href="tickets.html" class="btn-ticket" data-key="btn-ticket">Buy Ticket</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand" data-key="footer-brand">National Qazaq Philharmonic</p>
+        <p class="footer-body" data-key="footer-about">The guardian of Kazakhstan's musical soul since 1934.</p>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col1">Concerts</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-season">2024–25 Season</a></li>
+          <li><a href="#" data-key="footer-gala">Gala Events</a></li>
+          <li><a href="#" data-key="footer-chamber">Chamber Series</a></li>
+          <li><a href="#" data-key="footer-archive">Archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col2">Ensemble</p>
+        <ul class="footer-links">
+          <li><a href="orchestra.html" data-key="footer-conductors">Conductors</a></li>
+          <li><a href="orchestra.html" data-key="footer-artists">Principal Artists</a></li>
+          <li><a href="#" data-key="footer-soloists">Guest Soloists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title" data-key="footer-col3">Visit</p>
+        <ul class="footer-links">
+          <li><a href="#" data-key="footer-venue">Abay Opera House</a></li>
+          <li><a href="tickets.html" data-key="footer-tickets">Tickets</a></li>
+          <li><a href="#" data-key="footer-contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span data-key="footer-copy">© 2025 National Qazaq Philharmonic ·
+        Almaty</span><span><span data-key="footer-privacy">Privacy</span> · <span
+          data-key="footer-terms">Terms</span></span></div>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    // --- ФИЛЬТР ПО МЕСЯЦАМ ---
+    function filterMonth(month, btn) {
+      document.querySelectorAll('.c-card').forEach(card => {
+        card.style.display = (month === 'all' || card.dataset.month === month) ? '' : 'none';
+      });
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    // --- ПЕРЕВОДЫ ---
+    window._pageTranslations = {
+      en: {
+        'h-tag': '2025 Season', 'h-title': '<em>Concert</em> Calendar',
+        'h-lead': 'Six performances across Almaty and Astana.',
+        'filter-label': 'Filter by month', 'filter-all': 'All', 'filter-may': 'May', 'filter-jun': 'June', 'filter-jul': 'July',
+        'c1-month': 'May 2025', 'c1-badge': 'Gala Opening', 'c1-prog': 'Mahler · Symphony No. 9 in D major', 'c1-perf': 'Ayan Sultanov, conductor',
+        'c2-month': 'May 2025', 'c2-prog': 'Qazaq Night · Traditional Programme', 'c2-perf': 'Dombra & Kobyz soloists',
+        'c3-month': 'June 2025', 'c3-prog': 'Brahms · Violin Concerto in D', 'c3-perf': 'Aigerim Bekova, violin',
+        'c4-month': 'June 2025', 'c4-badge': 'World Première', 'c4-prog': 'Dombra Concerto — New Commission', 'c4-perf': 'Askar Yessenamanov, conductor',
+        'c5-month': 'June 2025', 'c5-prog': 'Shostakovich · Symphony No. 5 in D minor', 'c5-perf': 'Ayan Sultanov, conductor',
+        'c6-month': 'July 2025', 'c6-prog': 'Summer Gala · Music of the Steppe', 'c6-perf': 'Full Ensemble & Guest Artists',
+        'btn-ticket': 'Buy Ticket',
+      },
+      ru: {
+        'h-tag': 'Сезон 2025', 'h-title': '<em>Афиша</em> концертов',
+        'h-lead': 'Шесть выступлений в Алматы и Астане.',
+        'filter-label': 'По месяцу', 'filter-all': 'Все', 'filter-may': 'Май', 'filter-jun': 'Июнь', 'filter-jul': 'Июль',
+        'c1-month': 'Май 2025', 'c1-badge': 'Гала-открытие', 'c1-prog': 'Малер · Симфония № 9 ре мажор', 'c1-perf': 'Аян Султанов, дирижёр',
+        'c2-month': 'Май 2025', 'c2-prog': 'Казахская ночь · Традиционная программа', 'c2-perf': 'Солисты на домбре и кобызе',
+        'c3-month': 'Июнь 2025', 'c3-prog': 'Брамс · Скрипичный концерт ре мажор', 'c3-perf': 'Айгерим Бекова, скрипка',
+        'c4-month': 'Июнь 2025', 'c4-badge': 'Мировая премьера', 'c4-prog': 'Концерт для домбры — новая комиссия', 'c4-perf': 'Аскар Есенаманов, дирижёр',
+        'c5-month': 'Июнь 2025', 'c5-prog': 'Шостакович · Симфония № 5 ре минор', 'c5-perf': 'Аян Султанов, дирижёр',
+        'c6-month': 'Июль 2025', 'c6-prog': 'Летняя гала · Музыка степи', 'c6-perf': 'Весь оркестр и приглашённые артисты',
+        'btn-ticket': 'Купить билет',
+      },
+      kz: {
+        'h-tag': '2025 Маусымы', 'h-title': '<em>Концерт</em> күнтізбесі',
+        'h-lead': 'Алматы мен Астанадағы алты өнер көрсету.',
+        'filter-label': 'Айы бойынша', 'filter-all': 'Барлығы', 'filter-may': 'Мамыр', 'filter-jun': 'Маусым', 'filter-jul': 'Шілде',
+        'c1-month': 'Мамыр 2025', 'c1-badge': 'Гала ашылу', 'c1-prog': 'Малер · 9-симфония, ре мажор', 'c1-perf': 'Аян Сүлтанов, дирижер',
+        'c2-month': 'Мамыр 2025', 'c2-prog': 'Қазақ кеші · Дәстүрлі бағдарлама', 'c2-perf': 'Домбыра мен қылқобыз солистері',
+        'c3-month': 'Маусым 2025', 'c3-prog': 'Брамс · Скрипка концерті, ре мажор', 'c3-perf': 'Айгерім Бекова, скрипка',
+        'c4-month': 'Маусым 2025', 'c4-badge': 'Дүниежүзілік премьера', 'c4-prog': 'Домбыра концерті — жаңа тапсырыс', 'c4-perf': 'Асқар Есенаманов, дирижер',
+        'c5-month': 'Маусым 2025', 'c5-prog': 'Шостакович · 5-симфония, ре минор', 'c5-perf': 'Аян Сүлтанов, дирижер',
+        'c6-month': 'Шілде 2025', 'c6-prog': 'Жазғы гала · Дала музыкасы', 'c6-perf': 'Толық оркестр және шақырылған артистер',
+        'btn-ticket': 'Билет сатып алу',
+      }
+    };
+  </script>
+</body>
+
+</html>
